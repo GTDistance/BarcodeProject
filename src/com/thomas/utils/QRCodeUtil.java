@@ -179,6 +179,7 @@ public class QRCodeUtil {
 	}
 	public static void encodeHefi(String[] contents, String destPath)
 			throws Exception {
+		DeleteFolder.delAllFile(destPath);
 		for (int i = 0;i<contents.length;i++) {
 			String content = contents[i];
 			String pileGunCode=content.split("hlht://")[1].split("\\.")[0].substring(7);

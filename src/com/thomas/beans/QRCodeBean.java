@@ -1,8 +1,11 @@
 package com.thomas.beans;
 
 public class QRCodeBean {
-        
-        public QRCodeBean(String fileName, String[] pileGunCodes) {
+
+    public QRCodeBean() {
+    }
+
+    public QRCodeBean(String fileName, String[] pileGunCodes) {
             this.fileName = fileName;
             this.pileGunCodes = pileGunCodes;
         }

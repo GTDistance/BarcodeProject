@@ -10,8 +10,8 @@ import java.util.List;
 public class Main {
 
     private static String bootFilePath = "/Users/thomas/Documents/JavaProject/BarcodeProject/桩的二维码/";
-    private static String excelPath = "/Users/thomas/Desktop/桩编码.xlsx";
     private static String logoPath = "/Users/thomas/Documents/JavaProject/BarcodeProject/image/logo.png";
+    private static String excelPath = "/Users/thomas/Desktop/桩编码.xlsx";
 
     public static void main(String[] args) {
         try {

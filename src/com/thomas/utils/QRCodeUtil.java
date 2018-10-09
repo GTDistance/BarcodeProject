@@ -378,11 +378,11 @@ public class QRCodeUtil {
 
             File file = new File(newPath);
 //            BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            BufferedImage bi = new BufferedImage(width, height+fontSize*2, BufferedImage.TYPE_INT_RGB);
+            BufferedImage bi = new BufferedImage(width, height+fontSize*4, BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = bi.createGraphics();
             g2.setBackground(Color.WHITE);
 //            g2.clearRect(0, 0, width, height);
-            g2.clearRect(0, 0, width, height+fontSize*2);
+            g2.clearRect(0, 0, width, height+fontSize*4);
 //            g2.drawImage(image, 0, 0, width - 25, height - 25, null); //这里减去25是为了防止字和图重合
             g2.drawImage(image, 0, 0, width , height, null); //这里减去25是为了防止字和图重合
             /** 设置生成图片的文字样式 * */
@@ -396,9 +396,11 @@ public class QRCodeUtil {
             Rectangle2D bounds = font.getStringBounds(str, context);
             double x = (width - bounds.getWidth()) / 2;
 //            double y = (height - bounds.getHeight()) / 2; //Y轴居中
-            double y = (height - bounds.getHeight());
+//            double y = (height - bounds.getHeight());
+            double y = (height );
             double ascent = -bounds.getY();
-            double baseY = y + ascent+fontSize;
+//            double baseY = y + ascent+fontSize*2;
+            double baseY = y + ascent*2;
 
             /** 防止生成的文字带有锯齿 * */
             g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);

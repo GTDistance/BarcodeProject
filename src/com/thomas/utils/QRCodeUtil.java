@@ -5,6 +5,7 @@ import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import sun.awt.SunHints;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -27,17 +28,25 @@ public class QRCodeUtil {
     private static final String FORMAT_NAME = "JPG";
     // 二维码尺寸
 //    private static final int QRCODE_SIZE = 300;
+//    private static final int QRCODE_SIZE = 800;
 //    private static final int QRCODE_SIZE = 1000;
-    private static final int QRCODE_SIZE = 600;
+//    private static final int QRCODE_SIZE = 600;
+    private static final int QRCODE_SIZE = 620;
 //    private static final int QRCODE_SIZE = 500;
+//    private static final int QRCODE_SIZE = 550;
     // LOGO宽度
 //    private static final int WIDTH = 60;
-    private static final int WIDTH = 200;
+//    private static final int WIDTH = 200;
+    private static final int WIDTH = 160;
+//    private static final int WIDTH = 150;
     // LOGO高度
-    private static final int HEIGHT = 200;
+//    private static final int HEIGHT = 200;
+    private static final int HEIGHT = 160;
+//    private static final int HEIGHT = 150;
 //    private static final int HEIGHT = 60;
 
-    private static final int FONT_SIZE = 30;
+//    private static final int FONT_SIZE = 30;
+    private static final int FONT_SIZE = 35;
 
     private static BufferedImage createImage(String content, String imgPath,
                                              boolean needCompress) throws Exception {
@@ -90,10 +99,9 @@ public class QRCodeUtil {
             if (height > HEIGHT) {
                 height = HEIGHT;
             }
-            Image image = src.getScaledInstance(width, height,
-                    Image.SCALE_SMOOTH);
-            BufferedImage tag = new BufferedImage(width, height,
-                    BufferedImage.TYPE_INT_RGB);
+            Image image = src.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+//            Image image = src.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
+            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             Graphics g = tag.getGraphics();
             g.drawImage(image, 0, 0, null); // 绘制缩小后的图
             g.dispose();
@@ -386,7 +394,8 @@ public class QRCodeUtil {
 //            g2.drawImage(image, 0, 0, width - 25, height - 25, null); //这里减去25是为了防止字和图重合
             g2.drawImage(image, 0, 0, width , height, null); //这里减去25是为了防止字和图重合
             /** 设置生成图片的文字样式 * */
-            Font font = new Font("黑体", Font.BOLD, fontSize);
+//            Font font = new Font("黑体", Font.BOLD, fontSize);
+            Font font = new Font("宋体", Font.PLAIN, fontSize);
 //            Font font = new Font("黑体", Font.BOLD, 18);
             g2.setFont(font);
             g2.setPaint(Color.BLACK);
@@ -404,6 +413,15 @@ public class QRCodeUtil {
 
             /** 防止生成的文字带有锯齿 * */
             g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+//            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+//            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
+//            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//            g2.setRenderingHint(SunHints.KEY_ANTIALIASING, SunHints.VALUE_ANTIALIAS_OFF);
+//            g2.setRenderingHint(SunHints.KEY_TEXT_ANTIALIASING, SunHints.VALUE_TEXT_ANTIALIAS_DEFAULT);
+//            g2.setRenderingHint(SunHints.KEY_STROKE_CONTROL, SunHints.VALUE_STROKE_DEFAULT);
+//            g2.setRenderingHint(SunHints.KEY_TEXT_ANTIALIAS_LCD_CONTRAST, 140);
+//            g2.setRenderingHint(SunHints.KEY_FRACTIONALMETRICS, SunHints.VALUE_FRACTIONALMETRICS_OFF);
+//            g2.setRenderingHint(SunHints.KEY_RENDERING, SunHints.VALUE_RENDER_DEFAULT);
 
             /** 在图片上生成文字 * */
             g2.drawString(str, (int) x, (int) baseY);

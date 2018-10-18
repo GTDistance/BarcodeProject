@@ -11,20 +11,27 @@ public class Main {
 
     private static String bootFilePath = "/Users/thomas/Documents/JavaProject/BarcodeProject/桩的二维码/";
     private static String logoPath = "/Users/thomas/Documents/JavaProject/BarcodeProject/image/logo.png";
-    private static String excelPath = "/Users/thomas/Desktop/桩编码.xlsx";
+//    private static String excelPath = "/Users/thomas/Desktop/桩编码.xlsx";
+//    private static String excelPath = "/Users/thomas/Desktop/生成二维码.xls";
+//    private static String excelPath = "/Users/thomas/Desktop/瑶海区郎溪路小学充电站.xlsx";
+//    private static String excelPath = "/Users/thomas/Desktop/1017二维码.xls";
+    private static String excelPath = "/Users/thomas/Desktop/庐阳区人民广场充电站.xlsx";
 
     public static void main(String[] args) {
         try {
             List<QRCodeBean> qrCodeBeans = ExcelUtil.readExcel(excelPath);
-            for (QRCodeBean qrCodeBean : qrCodeBeans) {
-                generateQRCode(bootFilePath, qrCodeBean);
+            int stationNum = qrCodeBeans.size();
+            System.out.println("充电站总数："+stationNum);
+            for (int i = 0;i<stationNum;i++) {
+                generateQRCode(bootFilePath,qrCodeBeans.get(i),i+1);
             }
+            System.out.println("充电站打包结束");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void generateQRCode(String bootFilePath, QRCodeBean bean) {
+    public static void generateQRCode(String bootFilePath, QRCodeBean bean, int stationIndex) {
         String fileName = bean.getFileName();
         String[] pileGunCodes = bean.getPileGunCodes();
         String[] texts = new String[pileGunCodes.length];
@@ -39,9 +46,9 @@ public class Main {
             QRCodeUtil.encodeHefi(texts,logoPath , filePath);
             boolean flag = FileToZip.fileToZip(sourceFilePath, zipFilePath, fileName);
             if (flag) {
-                System.out.println(fileName+"文件打包成功!");
+                System.out.println(fileName+"文件打包成功!"+stationIndex);
             } else {
-                System.out.println(fileName+"文件打包失败!");
+                System.out.println(fileName+"文件打包失败!"+stationIndex);
             }
         } catch (Exception e) {
             e.printStackTrace();
